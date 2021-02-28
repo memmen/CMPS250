@@ -1,0 +1,47 @@
+; File: AS05.pep2
+;
+; A program that illustrates some "string operations".
+; P.M.J.
+;Spring 2020
+;
+           BR        main
+           .INCLUDE  "PEP2.pep1"
+           .APPEND   "Strings.pep2"
+;**********************************************************************
+PROMPT:    .ASCII    ":>\x00"
+COMMA:     .ASCII    ",\x00"
+NL:        .ASCII    "\n\x00"
+DONE:      .ASCII    "Done!\n\x00"
+;----------------------------------------------------------------------
+           .BYTE     255
+line: .BLOCK    256
+address:	.ADDRSS   line
+;----------------------------------------------------------------------
+;******* main ()
+main   :      NOP0
+;--------
+loop:      STRO      PROMPT,d
+           STRI      address,d
+			STRO      line,d
+;--------
+           PUSH      address,d  //Pass the address of the string
+           CALL      Scapcity
+   DECOA
+           STRO      COMMA,d
+           POPA//Remove the passed address
+;--------
+           PUSH	address,d
+           CALL		Slength
+STWA length,d
+DECO  length,d
+           STRO   COMMA,d
+           POPA
+;--------
+           STRO      NL,d
+	 CMP       length,d,0,i
+           BRGT      loop
+;--------
+           STRO      DONE,d
+           STOP
+.END
+
