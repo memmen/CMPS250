@@ -1,0 +1,11 @@
+label: operator operand ;comment
+;comment
+label:
+label:     ;comment
+label:   operator
+label: 	 operator     operands
+label:     operator 	 ;comment
+     ;comment
+   operator
+  operator     operands
+     operator      ;comment

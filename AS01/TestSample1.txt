@@ -1,0 +1,30 @@
+;comment
+     ;comment
+label:
+    label:
+label:;comment
+label:     ;comment
+label: operator
+label:operator
+label: 	 operator operands
+label: operator 	 ;comment
+label:operator;comment
+label: operator 	operands ;comment
+label: operator operands;comment
+label:operator operands;comment
+label:   operator op1,op2   ;comment
+label:operator op1,	  op2;comment
+         label:operator op1, op2;comment
+operator
+    operator     ;comment
+    operator;comment
+operator operands
+    operator    operands    ;comment
+  operator  op1, op2;comment
+aLongLabel:  aLongOperator   op1,op2,op3,op4         ;A longer comment
+   operator       "string:  with a colon"
+   operator    "string; with a semicolon"
+     operator     "string with lots of blanks                            in it"
+  operator   ':'
+  operator   ';'
+

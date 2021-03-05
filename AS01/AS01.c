@@ -31,6 +31,7 @@ char *removeTabs(char *lineValue);
 void printLine(char *comment, char *label, char *operator, char * operands);
 void format(char *value);
 void emptySpacing();
+bool inQuote(char *line, char val);
 
 /*
  * Function:  main 
@@ -292,12 +293,35 @@ char *findColonComment(char *lineValue)
     // If index is -1 a comment does not exist
     if (index == -1)
         return NULL;
+    if (inQuote(lineValue, ';'))
+        return NULL;
 
     // Get the substring of the comment
     char *comment = SsubStr(lineValue, index, Slength(lineValue));
-    char *line = "";
-    Scopy(line, lineValue);
+    if ((index) == 0)
+    {
+        Scopy("", lineValue);
+    }
+    else
+    {
+        char *line = SsubStr(lineValue, 0, index);
+        Strim(line);
+        Scopy(line, lineValue);
+    }
     return comment;
+}
+bool inQuote(char *line, char val)
+{
+    bool isInQuote = false;
+    bool found = false;
+    for (int pos = 0; pos < Slength(line); pos++)
+    {
+        if (line[pos] == '"' || line[pos] == '\'')
+            isInQuote = !isInQuote;
+        if (line[pos] == val && isInQuote)
+            return true;
+    }
+    return isInQuote;
 }
 /*
  * Function:  findLabel 
@@ -315,6 +339,8 @@ char *findLabel(char *lineValue)
 
     // If index is -1 a label does not exist
     if (index == -1)
+        return NULL;
+    if (inQuote(lineValue, ':'))
         return NULL;
 
     // Get the substring of the label
